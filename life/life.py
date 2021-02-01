@@ -50,8 +50,8 @@ glider_gun = np.array([
 
 
 class Game:
-    def __init__(game, Size):
-        game.board = np.zeros((Size, Size))
+    def __init__(self, Size):
+        self.board = np.zeros((Size, Size))
 
     def play(self):
         """Start a new game of life and play."""
@@ -84,6 +84,17 @@ class Game:
         pyplot.clf()
         pyplot.matshow(self.board, fignum=0, cmap='binary')
         pyplot.show()
+
+    def insert(self, pattern, coords):
+        """
+        Insert the pattern provided at a location
+        centred at a given position.
+        """
+        x, y = coords
+        reg_m, reg_n = pattern.grid.shape
+        self.board[
+            (x-reg_n//2):(x+reg_n//2+1), (y-reg_m//2):(y+reg_m//2+1)
+        ] = pattern.grid
 
 
 class Pattern:
